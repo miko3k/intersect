@@ -1,0 +1,55 @@
+body {
+    font-size: smaller;
+    font-family: sans-serif;
+    background-color: black;
+    color: grey;
+}
+
+.menu {
+    position: absolute;
+    width: 22em;
+}
+
+.mainview {
+    position: absolute;
+    top: 1em;
+    bottom: 3em;
+    left: 23em;
+    right: 1em;
+}
+
+.bottom_text {
+    position: absolute;
+    left: 23em;
+    bottom: 0.5em;
+    right: 1em;
+    height: 2em;
+}
+
+canvas {
+    border: 2px solid green;
+    font-size: 8pt;
+}
+
+fieldset {
+    border: 1px solid grey;
+}
+
+input, select {
+    background-color: #404000;
+    color: white;
+    border: 1px solid black;
+}
+
+.position, .rotation, .scale, .cut {
+    width: 5em;
+}
+
+.plusminusbutton {
+    padding: 0;
+    background-color: #808000;
+}
+
+a, a:visited, a:active, a:hover {
+    color: white
+}

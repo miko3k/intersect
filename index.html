@@ -3,42 +3,86 @@
     <head>
         <title>W T F</title>
         <meta charset="ascii">
+        <link rel="stylesheet" type="text/css" href="style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="matrix.js"></script>
         <script src="script.js"></script>
     </head>
 <body>
 
-<h1>Whooo!</h1>
-
-<form id="form1">
+<form class="menu">
+    <fieldset>
+        <legend>View</legend>
+        <input type='button' id="orthoview" value='Ortho'>
+        <input type='button' id="cabinetview" value='Cabinet'>
+    </fieldset>
     <fieldset>
         <legend>First thing</legend>
-        <label for="type_1">Object</label></br>
-        <select id="type_1">
+        <select id="objtype_1" class="objtype">
+            <option value="cube" selected>Cube</option>
             <option value="sphere">Sphere</option>
+            <option value="cone">Cone</option>
             <option value="cylinder">Cylinder</option>
-            <option value="cylinder">Cone</option>
-            <option value="box">Box</option>
         </select>
         <br/>
-        Rotation<br/>
-        <label for="rotx_1">X</label>
-        <input id="rotx_1" class="rotation"><br/>
-        <label for="roty_1">Y</label>
-        <input id="roty_1" class="rotation"><br/>
-        <label for="rotz_1">Z</label>
-        <input id="rotz_1" class="rotation"><br/>
+        Position<br/>
+        <label for="positionx_1">X</label><input id="positionx_1" class="position"><br/>
+        <label for="positiony_1">Y</label><input id="positiony_1" class="position"><br/>
+        <label for="positionz_1">Z</label><input id="positionz_1" class="position"><br/>
         Scale<br/>
-        <label for="scalex_1">X</label>
-        <input id="scalex_1" class="scale"><br/>
-        <label for="scaley_1">Y</label>
-        <input id="scaley_1" class="scale"><br/>
-        <label for="scalez_1">Z</label>
-        <input id="scalez_1" class="scale"><br/>
+        <label for="scalex_1">X</label><input id="scalex_1" class="scale"><br/>
+        <label for="scaley_1">Y</label><input id="scaley_1" class="scale"><br/>
+        <label for="scalez_1">Z</label><input id="scalez_1" class="scale"><br/>
+        Rotation<br/>
+        <label for="rotx_1">X</label><input id="rotx_1" class="rotation"><br/>
+        <label for="roty_1">Y</label><input id="roty_1" class="rotation"><br/>
+        <label for="rotz_1">Z</label><input id="rotz_1" class="rotation"><br/>
+    </fieldset>
+    <fieldset>
+        <legend>Other thing</legend>
+        <select id="objtype_2" class="objtype">
+            <option value="cube">Cube</option>
+            <option value="sphere" selected>Sphere</option>
+            <option value="cone">Cone</option>
+            <option value="cylinder">Cylinder</option>
+        </select>
+        <br/>
+        Position<br/>
+        <label for="positionx_2">X</label><input id="positionx_2" class="position"><br/>
+        <label for="positiony_2">Y</label><input id="positiony_2" class="position"><br/>
+        <label for="positionz_2">Z</label><input id="positionz_2" class="position"><br/>
+        Scale<br/>
+        <label for="scalex_2">X</label><input id="scalex_2" class="scale"><br/>
+        <label for="scaley_2">Y</label><input id="scaley_2" class="scale"><br/>
+        <label for="scalez_2">Z</label><input id="scalez_2" class="scale"><br/>
+        Rotation<br/>
+        <label for="rotx_2">X</label><input id="rotx_2" class="rotation"><br/>
+        <label for="roty_2">Y</label><input id="roty_2" class="rotation"><br/>
+        <label for="rotz_2">Z</label><input id="rotz_2" class="rotation"><br/>
+    </fieldset>
+    <fieldset id="cutsFieldsset">
+        <legend>Cuts</legend>
+        <input type='button' id="addcut" value='Add'>
+    </fieldset>
+    <fieldset>
+        <legend>Hints</legend>
+        <ul>
+            <li>use up/down/pgup/pgdown in input fields</li>
+            <li>use esc to remove cut in input field</li>
+            <li>mouse wheel too zoom</li>
+            <li>drag with left mouse button to rotate</li>
+        </ul>
     </fieldset>
 
-
 </form>
+
+<div class="mainview" id="mainview">
+    <canvas id="canvas"></canvas>
+</div>
+
+<div class="bottom_text">
+    Permalink: <a id="permalink" href="href" target="_blank"></a>
+</div>
 
 </body>
 </html>
