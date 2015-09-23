@@ -1,41 +1,107 @@
 body {
     font-size: smaller;
     font-family: sans-serif;
-    background-color: black;
+    background-color: #400000;
     color: grey;
 }
 
-.menu {
+.menu1 {
     position: absolute;
-    width: 22em;
+    width: 18em;
     left: 0;
     top: 0;
+    padding: 4pt;
+    margin: 0;
+}
+
+.menu2 {
+    position: absolute;
+    left: 19em;
+    width: 21em;
+    top: 0;
+    padding: 4pt;
+    margin: 0;
 }
 
 .mainview {
     position: absolute;
-    top: 1em;
+    top: 2em;
     bottom: 3em;
-    left: 23em;
+    left: 41em;
     right: 1em;
 }
 
-.bottom_text {
+.permalink_container {
     position: absolute;
-    left: 23em;
-    bottom: 0.5em;
+    top: 0.5em;
     right: 1em;
-    height: 2em;
+    left: 41em;
+    height: 1em;
+    overflow: visible;
 }
 
 canvas {
-    border: 2px solid green;
     font-size: 8pt;
+    border: 1pt dotted #FF8080;
+    background-color: black;
 }
 
 fieldset {
-    border: 1px solid grey;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 6pt;
+    padding: 3pt;
+    padding-top: 6pt;
 }
+
+legend {
+    width: 100%;
+    color: white;
+    margin: -3pt;
+    padding: 3pt;
+}
+
+.firstThingFieldset {
+    background-color: #602000;
+}
+
+.firstThingFieldset legend {
+    background-color: #A04000;
+}
+
+.secondThingFieldset {
+    background-color: #002080;
+}
+
+.secondThingFieldset legend {
+    background-color: #0040A0;
+}
+
+.viewFieldset {
+    background-color: #707020;
+}
+
+.viewFieldset legend {
+    background-color: #A0A040;
+}
+
+.cutsFieldset {
+    background-color: #008020;
+}
+
+.cutsFieldset legend {
+    background-color: #00A040;
+}
+
+.hintsFieldset {
+    background-color: #702070;
+}
+
+.hintsFieldset legend {
+    background-color: #A030A0;
+}
+
 
 input, select {
     background-color: #404000;

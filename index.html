@@ -10,16 +10,11 @@
     </head>
 <body>
 
-<form class="menu">
-    <fieldset>
-        <legend>View</legend>
-        <input type='button' id="orthoview" value='Ortho'>
-        <input type='button' id="cabinetview" value='Cabinet'>
-    </fieldset>
-    <fieldset>
+<form class="menu1">
+    <fieldset class='firstThingFieldset'>
         <legend>First thing</legend>
         <select id="objtype_1" class="objtype">
-            <option value="cube" selected>Cube</option>
+            <option value="cube">Cube</option>
             <option value="sphere">Sphere</option>
             <option value="cone">Cone</option>
             <option value="cylinder">Cylinder</option>
@@ -38,11 +33,11 @@
         <label for="roty_1">Y</label><input id="roty_1" class="rotation"><br/>
         <label for="rotz_1">Z</label><input id="rotz_1" class="rotation"><br/>
     </fieldset>
-    <fieldset>
+    <fieldset class='secondThingFieldset'>
         <legend>Other thing</legend>
         <select id="objtype_2" class="objtype">
             <option value="cube">Cube</option>
-            <option value="sphere" selected>Sphere</option>
+            <option value="sphere">Sphere</option>
             <option value="cone">Cone</option>
             <option value="cylinder">Cylinder</option>
         </select>
@@ -60,11 +55,14 @@
         <label for="roty_2">Y</label><input id="roty_2" class="rotation"><br/>
         <label for="rotz_2">Z</label><input id="rotz_2" class="rotation"><br/>
     </fieldset>
-    <fieldset id="cutsFieldsset">
-        <legend>Cuts</legend>
-        <input type='button' id="addcut" value='Add'>
+    <fieldset class='viewFieldset'>
+        <legend>View</legend>
+        <input type='button' id="orthoview" value='Ortho'>
+        <input type='button' id="cabinetview" value='Cabinet'>
     </fieldset>
-    <fieldset>
+</form>
+<form class="menu2">
+    <fieldset class='hintsFieldset'>
         <legend>Hints</legend>
         <ul>
             <li>this page imperfectly calculates itersections of things using brute force approach</li>
@@ -74,6 +72,10 @@
             <li>drag with left mouse button to rotate</li>
         </ul>
     </fieldset>
+    <fieldset id="cutsFieldset" class='cutsFieldset'>
+        <legend>Cuts</legend>
+        <input type='button' id="addcut" value='Add'>
+    </fieldset>
 
 </form>
 
@@ -81,7 +83,7 @@
     <canvas id="canvas"></canvas>
 </div>
 
-<div class="bottom_text">
+<div class="permalink_container">
     Permalink: <a id="permalink" href="href" target="_blank"></a>
 </div>
 

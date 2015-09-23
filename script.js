@@ -539,12 +539,15 @@ function serializeObjectDescription(d) {
         ":" + d.positionz;
 }
 
-function unserializeObjectDescriptionIntoFields(str, suffix) {
+function unserializeObjectDescriptionIntoFields(str, suffix, defobj) {
     var array = str.split(":");
     while(array.length < 10)
         array.push("");
 
-    selectSelect($("#objtype"+suffix), array[0]);
+    var obj = array[0];
+    if(!obj) obj =defobj;
+
+    selectSelect($("#objtype"+suffix), obj);
     $("#rotx"+suffix).val(array[1]);
     $("#roty"+suffix).val(array[2]);
     $("#rotz"+suffix).val(array[3]);
@@ -865,7 +868,7 @@ function addCut(axis, val) {
         "-1", function(v) { return roundTo(v+1, 1) },
         function() { div.remove(); scheduleRecalc(); })
 
-    $("#cutsFieldsset").append(div);
+    $("#cutsFieldset").append(div);
 }
 
 var scheduleHandle = undefined;
@@ -890,8 +893,8 @@ $(document).ready(function() {
     while(parts.length < 4)
         parts.push("");
 
-    unserializeObjectDescriptionIntoFields(parts[0], "_1");
-    unserializeObjectDescriptionIntoFields(parts[1], "_2");
+    unserializeObjectDescriptionIntoFields(parts[0], "_1", "cube");
+    unserializeObjectDescriptionIntoFields(parts[1], "_2", "sphere");
     unserializeView(parts[3]);
     unserializeCutsDescription(parts[2]).forEach(function(cut) {
         addCut(cut.axis, cut.value);
@@ -967,5 +970,5 @@ $(document).ready(function() {
     });
 
     $(window).resize(scheduleRedraw);
-    scheduleRecalc();
+    recalc();
 });
