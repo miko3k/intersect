@@ -21,7 +21,7 @@ function selectSelect(select, val) {
     var first;
     var good;
 
-    $(select, "option").each(function() {
+    $(select).children("option").each(function() {
         if(!first) first = this;
         if($(this).prop("value") == val) {
             good = this;
@@ -586,12 +586,10 @@ function serializeCutsDescription(cuts) {
 function unserializeCutsDescription(str) {
     var result = []
     var parts = str.split(":");
-    if(parts.length % 2 != 0)
-        parts.push("");
 
-    for(var i=0;i<parts.length;i+=2) {
-        var axis = parts[i];
-        var value = makeNumber(parts[i+1], 0);
+    for(var i=0;i<Math.trunc(parts.length/2);++i) {
+        var axis = parts[i*2];
+        var value = makeNumber(parts[i*2+1], 0);
         if(axis != "x" && axis != "y" && axis != "z")
             axis = "x";
 
