@@ -6,39 +6,46 @@ function roundTo(n, places) {
     return Number(n)
 }
 
-function normval(el, origval) {
+function makeNumber(origval, def) {
     var val = Number(origval)
+    if(!isNaN(val) && isFinite(val) && String(origval).trim()) {
+        return val;
+    } else {
+        return def;
+    }
+}
 
+function normval(el, origval) {
     var id = $(el).prop('class')
     var isrot = id.indexOf('rotation') >= 0
     var isscale = id.indexOf('scale') >= 0
     var isposition = id.indexOf('position') >= 0
     var iscut = id.indexOf('cut') >= 0
 
-    if(!isNaN(val) && isFinite(val) && String(origval).trim()) {
-        if(isrot) {
-            if(val < 0) {
-                return 360 - ((-val) % 360)
-            } else {
-                return val % 360;
-            }
+    var def;
+    if(isscale)
+        def = 1;
+    else
+        def = 0;
+
+    var val = makeNumber(origval, def)
+
+    if(isrot) {
+        if(val < 0) {
+            return 360 - ((-val) % 360)
+        } else {
+            return val % 360;
         }
-        if(isscale) {
-            if(val < 0.01) {
-                return 0.01;
-            } else {
-                return val;
-            }
-        }
-        if(isposition || iscut) {
+    }
+    if(isscale) {
+        if(val < 0.01) {
+            return 0.01;
+        } else {
             return val;
         }
-    } else {
-        if(isscale) {
-            return 1;
-        } else {
-            return 0;
-        }
+    }
+    if(isposition || iscut) {
+        return val;
     }
 }
 
@@ -501,18 +508,36 @@ function describeObject(suffix) {
     };
 }
 
-function serializeObjectDescrption(d) {
-            return d.objtype +
-                ":" + d.rotx +
-                ":" + d.roty +
-                ":" + d.scalez +
-                ":" + d.rotz +
-                ":" + d.scalex +
-                ":" + d.scaley +
-                ":" + d.positionz +
-                ":" + d.positionx +
-                ":" + d.positiony;
+function serializeObjectDescription(d) {
+    return d.objtype +
+        ":" + d.rotx +
+        ":" + d.roty +
+        ":" + d.rotz +
+        ":" + d.scalex +
+        ":" + d.scaley +
+        ":" + d.scalez +
+        ":" + d.positionx +
+        ":" + d.positiony +
+        ":" + d.positionz;
 }
+
+function unserializeObjectDescriptionIntoFields(str, suffix) {
+    var array = str.split(":");
+    while(array.length < 10)
+        array.push("");
+
+    $("#objtype"+suffix).val(array[0]);
+    $("#rotx"+suffix).val(array[1]);
+    $("#roty"+suffix).val(array[2]);
+    $("#rotz"+suffix).val(array[3]);
+    $("#scalex"+suffix).val(array[4]);
+    $("#scaley"+suffix).val(array[5]);
+    $("#scalez"+suffix).val(array[6]);
+    $("#positionx"+suffix).val(array[7]);
+    $("#positiony"+suffix).val(array[8]);
+    $("#positionz"+suffix).val(array[9]);
+}
+
 
 function describeCuts() {
     var result = []
@@ -523,16 +548,6 @@ function describeCuts() {
         result.push({axis: axis, value: val })
     });
     return result
-}
-
-function serializeViewDescription(view) {
-    var proj;
-    switch(view.projection) {
-        case ortho: proj = "o"; break;
-        default: proj = "c"; break;
-    }
-
-    return view.zoom + ":" + roundTo(view.hRot,4) + ":" + roundTo(view.vRot,4) + ":" + proj;
 }
 
 function serializeCutsDescription(cuts) {
@@ -548,6 +563,25 @@ function serializeCutsDescription(cuts) {
     });
     return result;
 }
+
+
+function unserializeCutsDescription(str) {
+    var result = []
+    var parts = str.split(":");
+    if(parts.length % 2 != 0)
+        parts.push("");
+
+    for(var i=0;i<parts.length;i+=2) {
+        var axis = parts[i];
+        var value = makeNumber(parts[i+1], 0);
+        if(axis != "x" && axis != "y" && axis != "z")
+            axis = "x";
+
+        result.push({axis: axis, value: value})
+    }
+    return result
+}
+
 
 
 var theFirst, theSecond, theIntersection
@@ -572,6 +606,31 @@ var theSceneDescription = {
         this.cuts = describeCuts();
     }
 };
+
+function serializeView() {
+    var proj;
+    var view = theView
+    switch(view.projection) {
+        case ortho: proj = "o"; break;
+        default: proj = "c"; break;
+    }
+    return view.zoom + ":" + roundTo(view.hRot,4) + ":" + roundTo(view.vRot,4) + ":" + proj;
+}
+
+function unserializeView(str) {
+    var array = str.split(":");
+    while(array.length < 4)
+        array.push("");
+
+    theView.zoom = makeNumber(array[0], 1)
+    theView.hRot = makeNumber(array[1], 0)
+    theView.vRot = makeNumber(array[2], 0)
+    if(array[3] == "o")
+        theView.projection = ortho;
+    else
+        theView.projection = cabinet;
+}
+
 
 function recalc() {
 //    console.group("Recalc");
@@ -696,10 +755,10 @@ function redraw() {
     // but this one is less error prone and works for file:/// properly
     var myurl = window.location.href.split("#")[0]
     var str = myurl +
-        "#" + serializeObjectDescrption(theSceneDescription.obj1) +
-        "_" + serializeObjectDescrption(theSceneDescription.obj2) +
+        "#" + serializeObjectDescription(theSceneDescription.obj1) +
+        "_" + serializeObjectDescription(theSceneDescription.obj2) +
         "_" + serializeCutsDescription(theSceneDescription.cuts) +
-        "_" + serializeViewDescription(theView);
+        "_" + serializeView();
 
     $("#permalink").attr("href", str);
     $("#permalink").text(str);
@@ -767,7 +826,7 @@ function redraw() {
 //    console.log("Done painting");
 }
 
-function addCut(val) {
+function addCut(axis, val) {
     // this one does NOT recalculate stuff
     var input = $("<input type='text' class='cut'/>");
     input.val(val)
@@ -776,6 +835,7 @@ function addCut(val) {
         "<select>"+
         "<option value='x'>X</option><option value='y'>Y</option><option value='z'>Z</option>"+
         "</select>")
+    select.val(axis)
     select.change(scheduleRecalc)
 
     div.append(select)
@@ -806,6 +866,20 @@ var scheduleRecalc = function() { schedule(recalc, 300); }
 var scheduleRedraw = function() { schedule(redraw, 10); }
 
 $(document).ready(function() {
+    var hash = window.location.hash
+    var idx = hash.lastIndexOf("#")
+    if(idx >= 0) hash = hash.substring(idx+1)
+    var parts = hash.split("_");
+    if(parts.length < 4)
+        parts.push("");
+
+    unserializeObjectDescriptionIntoFields(parts[0], "_1");
+    unserializeObjectDescriptionIntoFields(parts[1], "_2");
+    unserializeView(parts[3]);
+    unserializeCutsDescription(parts[2]).forEach(function(cut) {
+        addCut(cut.axis, cut.value);
+    });
+
     $(".objtype").change(scheduleRecalc)
     $(".rotation").each(function() {
         setupButtons(this,
@@ -851,14 +925,14 @@ $(document).ready(function() {
             $(this).mousemove(function(e) {
                 var dx = lastX - e.pageX
                 var dy = lastY - e.pageY
-                var min = Math.min($(this).width(), $(this).height())
+                var min = Math.min($(this).width(), $(this).height()) * 1.2;
                 function clamp(what) {
                     while(what > 1.0) what -= 1.0;
                     while(what < -1.0) what += 1.0;
                     return what;
                 }
-                theView.hRot += clamp(dx / min)
-                theView.vRot += clamp(dy / min)
+                theView.hRot -= clamp(dx / min)
+                theView.vRot -= clamp(dy / min)
 
                 scheduleRedraw()
 
@@ -874,7 +948,6 @@ $(document).ready(function() {
     $("body").mouseup(function(e) {
         $("#canvas").off("mousemove")
     });
-    console.log(window.location.hash)
 
     $(window).resize(scheduleRedraw);
     scheduleRecalc();
