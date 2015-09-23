@@ -8,6 +8,8 @@ body {
 .menu {
     position: absolute;
     width: 22em;
+    left: 0;
+    top: 0;
 }
 
 .mainview {

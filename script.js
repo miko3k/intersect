@@ -15,6 +15,24 @@ function makeNumber(origval, def) {
     }
 }
 
+// Selects value from <select>, makes sure such <option> is present.
+// If not, selects first <option>
+function selectSelect(select, val) {
+    var first;
+    var good;
+
+    $(select, "option").each(function() {
+        if(!first) first = this;
+        if($(this).prop("value") == val) {
+            good = this;
+        }
+    });
+    if(!good)
+        good = first;
+
+    $(select).val($(good).prop("value"));
+}
+
 function normval(el, origval) {
     var id = $(el).prop('class')
     var isrot = id.indexOf('rotation') >= 0
@@ -526,7 +544,7 @@ function unserializeObjectDescriptionIntoFields(str, suffix) {
     while(array.length < 10)
         array.push("");
 
-    $("#objtype"+suffix).val(array[0]);
+    selectSelect($("#objtype"+suffix), array[0]);
     $("#rotx"+suffix).val(array[1]);
     $("#roty"+suffix).val(array[2]);
     $("#rotz"+suffix).val(array[3]);
@@ -835,7 +853,8 @@ function addCut(axis, val) {
         "<select>"+
         "<option value='x'>X</option><option value='y'>Y</option><option value='z'>Z</option>"+
         "</select>")
-    select.val(axis)
+    selectSelect(select, axis)
+//    select.val(axis)
     select.change(scheduleRecalc)
 
     div.append(select)
@@ -870,7 +889,7 @@ $(document).ready(function() {
     var idx = hash.lastIndexOf("#")
     if(idx >= 0) hash = hash.substring(idx+1)
     var parts = hash.split("_");
-    if(parts.length < 4)
+    while(parts.length < 4)
         parts.push("");
 
     unserializeObjectDescriptionIntoFields(parts[0], "_1");
