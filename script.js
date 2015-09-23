@@ -1,11 +1,9 @@
 "use strict";
 
 function roundTo(n, places) {
-    var big = 1;
-    for(; places > 0; --places) 
-        big *= 10;
-
-    return Math.round(n*big)/big;
+    n = Number(n)
+    n = n.toFixed(places)
+    return Number(n)
 }
 
 function normval(el, origval) {
@@ -504,15 +502,15 @@ function describeObject(suffix) {
 }
 
 function serializeObjectDescrption(d) {
-            return d.objtype + 
-                ":" + d.rotx + 
-                ":" + d.roty + 
-                ":" + d.scalez + 
-                ":" + d.rotz + 
-                ":" + d.scalex + 
-                ":" + d.scaley + 
-                ":" + d.positionz + 
-                ":" + d.positionx + 
+            return d.objtype +
+                ":" + d.rotx +
+                ":" + d.roty +
+                ":" + d.scalez +
+                ":" + d.rotz +
+                ":" + d.scalex +
+                ":" + d.scaley +
+                ":" + d.positionz +
+                ":" + d.positionx +
                 ":" + d.positiony;
 }
 
@@ -534,7 +532,7 @@ function serializeViewDescription(view) {
         default: proj = "c"; break;
     }
 
-    return view.zoom + ":" + view.hRot + ":" + view.vRot + ":" + proj;
+    return view.zoom + ":" + roundTo(view.hRot,4) + ":" + roundTo(view.vRot,4) + ":" + proj;
 }
 
 function serializeCutsDescription(cuts) {
@@ -581,7 +579,7 @@ function recalc() {
     var obj1 = theSceneDescription.obj1
     var obj2 = theSceneDescription.obj2
     var cuts = theSceneDescription.cuts
-    
+
 
 //    console.log(obj1);
 //    console.log(obj2)
@@ -695,10 +693,10 @@ function redraw() {
 
     // we could also use something like
     //    window.location.protocol + window.location.host + window.location.pathname + window.location.search
-    // but this one is less error prone and works for file:/// properly 
+    // but this one is less error prone and works for file:/// properly
     var myurl = window.location.href.split("#")[0]
-    var str = myurl + 
-        "#" + serializeObjectDescrption(theSceneDescription.obj1) + 
+    var str = myurl +
+        "#" + serializeObjectDescrption(theSceneDescription.obj1) +
         "_" + serializeObjectDescrption(theSceneDescription.obj2) +
         "_" + serializeCutsDescription(theSceneDescription.cuts) +
         "_" + serializeViewDescription(theView);
@@ -742,7 +740,7 @@ function redraw() {
 
             var str = "(" + roundTo(c.x,3) + ", " + roundTo(c.y,3) + ", " + roundTo(c.z,3) + ")";
 
-            ctx.fillText(str, p.x+w, p.y); 
+            ctx.fillText(str, p.x+w, p.y);
         });
     }
     ctx.textBaseline = "hanging"
@@ -779,7 +777,7 @@ function addCut(val) {
         "<option value='x'>X</option><option value='y'>Y</option><option value='z'>Z</option>"+
         "</select>")
     select.change(scheduleRecalc)
-       
+
     div.append(select)
     div.append(input)
 
@@ -870,8 +868,8 @@ $(document).ready(function() {
         }
     });
     // <https://api.jquery.com/mousemove/>
-    //  "remember that the mouseup event might be sent to a different HTML element 
-    //   than the mousemove event was. To account for this, the mouseup handler should 
+    //  "remember that the mouseup event might be sent to a different HTML element
+    //   than the mousemove event was. To account for this, the mouseup handler should
     //   typically be bound to an element high up in the DOM tree, such as <body>"
     $("body").mouseup(function(e) {
         $("#canvas").off("mousemove")
