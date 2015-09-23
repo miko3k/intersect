@@ -782,10 +782,10 @@ function addCut(val) {
     div.append(input)
 
     setupButtons(input,
-        "+0.1", function(v) { return (Math.round(v*10)+1)/10 },
-        "-0.1", function(v) { return (Math.round(v*10)-1)/10 },
-        "+1", function(v) { return Math.round(v*10)/10+1 },
-        "-1", function(v) { return Math.round(v*10)/10-1 },
+        "+0.1", function(v) { return roundTo(v+0.1, 1) },
+        "-0.1", function(v) { return roundTo(v-0.1, 1) },
+        "+1", function(v) { return roundTo(v+1, 1) },
+        "-1", function(v) { return roundTo(v+1, 1) },
         function() { div.remove(); scheduleRecalc(); })
 
     $("#cutsFieldsset").append(div);
@@ -816,17 +816,17 @@ $(document).ready(function() {
     });
     $(".scale").each(function() {
         setupButtons(this,
-            "+0.1", function(v) { return (Math.round(v*10)+1)/10 },
-            "-0.1", function(v) { return (Math.round(v*10)-1)/10 },
+            "+0.1", function(v) { return roundTo(v+0.1,1) },
+            "-0.1", function(v) { return roundTo(v-0.1,1) },
             "*2", function(v) { return v*2 },
             "/2", function(v) { return v/2 });
     });
     $(".position").each(function() {
         setupButtons(this,
-            "+0.1", function(v) { return (Math.round(v*10)+1)/10 },
-            "-0.1", function(v) { return (Math.round(v*10)-1)/10 },
-            "+1", function(v) { return Math.round(v*10)/10+1 },
-            "-1", function(v) { return Math.round(v*10)/10-1 });
+            "+0.1", function(v) { return roundTo(v+0.1,1) },
+            "-0.1", function(v) { return roundTo(v-0.1,1) },
+            "+1", function(v) { return roundTo(v+1,1) },
+            "-1", function(v) { return roundTo(v-1,1) });
     });
     $("#addcut").on("click", function() { addCut(); scheduleRecalc(); } );
     $("#orthoview").on("click", function() { theView.setProjection(ortho); scheduleRedraw(); } )
