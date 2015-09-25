@@ -794,17 +794,17 @@ function redraw() {
     theFirst.forEach(function(t) {
         strokeTri(ctx, t, projection)
     });
-    ctx.strokeStyle = "#602000";
+    ctx.strokeStyle = "#FF5240";
     ctx.stroke();
 
     ctx.beginPath();
     theSecond.forEach(function(t) {
         strokeTri(ctx, t, projection)
     });
-    ctx.strokeStyle = "#002080";
+    ctx.strokeStyle = "#37B6CE";
     ctx.stroke();
 
-    ctx.strokeStyle =  "#888888"
+    ctx.strokeStyle =  "#FFFFFF"
     ctx.beginPath();
     theIntersection.forEach(function(line) {
         var a = project(line.a, projection)
@@ -814,6 +814,7 @@ function redraw() {
     });
     ctx.stroke();
 
+    var color;
     function drawCuts(cuts) {
         cuts.forEach(function(c) {
             var p = project(c, projection)
@@ -826,6 +827,8 @@ function redraw() {
 
             var str = "(" + roundTo(c.x,3) + ", " + roundTo(c.y,3) + ", " + roundTo(c.z,3) + ")";
 
+            ctx.strokeStyle = "#000000";
+            ctx.strokeText(str, p.x+w, p.y);
             ctx.fillText(str, p.x+w, p.y);
         });
     }
@@ -833,21 +836,21 @@ function redraw() {
     ctx.font = Math.round(lineWidth*7) + "px sans-serif"
 
     ctx.fillStyle   = "#FFA0A0"
-    ctx.strokeStyle = "#FFA0A0"
     ctx.beginPath();
     drawCuts(theCuts.x);
+    ctx.strokeStyle = "#FFA0A0"
     ctx.stroke();
 
     ctx.fillStyle   = "#A0FFA0"
-    ctx.strokeStyle = "#A0FFA0"
     ctx.beginPath();
     drawCuts(theCuts.y);
+    ctx.strokeStyle = "#A0FFA0"
     ctx.stroke();
 
     ctx.fillStyle   = "#A0A0FF"
-    ctx.strokeStyle = "#A0A0FF"
     ctx.beginPath();
     drawCuts(theCuts.z);
+    ctx.strokeStyle = "#A0A0FF"
     ctx.stroke();
 
 //    console.log("Done painting");
