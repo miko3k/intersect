@@ -1,123 +1,207 @@
 body {
-    font-size: smaller;
-    font-family: sans-serif;
-    background-color: #400000;
-    color: grey;
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
 }
+
+body, input {
+    font-size: 10pt;
+    font-family: sans-serif;
+    color: black;
+    border: 1pt solid black;
+    padding: 0;
+}
+
 
 .menu1 {
     position: absolute;
-    width: 18em;
-    left: 0;
-    top: 0;
-    padding: 4pt;
-    margin: 0;
+    width: 240pt;
+    left: 4pt;
+    top: 22pt;
 }
 
-.menu2 {
+.top {
     position: absolute;
-    left: 19em;
-    width: 21em;
+    left: 4pt;
     top: 0;
-    padding: 4pt;
-    margin: 0;
+    right: 0;
+    height: 20pt;
+}
+
+.top input {
+    background-color: #AAAAAA;
+    height: 16pt;
+    margin-top: 2pt;
+    float: left;
+    display: block;
+    margin-right: 4pt;
+    width: 77pt;
+}
+
+.top input:hover {
+    background-color: #CCCCCC;
+}
+
+.top input:active {
+    background-color: #888888;
+}
+
+
+
+.top a, .top a:active, .top a:hover, .top a:visited {
+    color: blue;
+    text-decoration: none;
+    display: block;
+    float: left;
+    height: 16pt;
+    margin-top: 4pt;
+    margin-left: 1pt;
+    overflow: hidden
+}
+
+.top a:hover {
+    text-decoration: underline;
 }
 
 .mainview {
     position: absolute;
-    top: 2em;
-    bottom: 3em;
-    left: 41em;
-    right: 1em;
-}
-
-.permalink_container {
-    position: absolute;
-    top: 0.5em;
-    right: 1em;
-    left: 41em;
-    height: 1em;
-    overflow: visible;
+    top: 22pt;
+    left: 248pt;
+    bottom: 5pt;
+    right: 5pt;
 }
 
 canvas {
-    font-size: 8pt;
-    border: 1pt dotted #FF8080;
     background-color: black;
 }
 
-fieldset {
-    border: 0;
+h3 {
+    font-size: 100%;
+    font-weight: bolder;
+    color: black;
     margin: 0;
+    padding: 4pt;
+}
+
+.firstThing, .secondThing, .cuts {
+    border: 1pt solid black;
+    margin-bottom: 4pt;
+}
+
+.firstThing {
+    background-color: #FF5240;
+}
+
+.firstThing h3 {
+    background-color: #BF3D30;
+}
+
+.secondThing {
+    background-color: #37B6CE;
+}
+
+.secondThing h3 {
+    background-color: #206876;
+}
+
+.cuts {
+    background-color: #FF9D40;
+}
+
+.cuts h3 {
+    background-color: #BF7630;
+}
+
+.controls {
+    margin: 5pt;
+}
+
+
+.hints {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+//    display: none;
+    z-index: 1;
+    background-color:rgba(0,0,0,0.7);
+    display: none;
+}
+
+.hints .hints_inner {
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border: 1pt solid black;
+    padding: 10pt;
+    overflow: auto;
+    /*http://www.cssmatic.com/box-shadow*/
+    -webkit-box-shadow: 6px 6px 10px 0px rgba(94,94,94,1);
+    -moz-box-shadow: 6px 6px 10px 0px rgba(94,94,94,1);
+    box-shadow: 6px 6px 10px 0px rgba(94,94,94,1);
+}
+
+.controls input, .controls select {
+    background-color: #FFFFFF;
+    color: black;
+    border: 1pt solid black;
     padding: 0;
-    margin-bottom: 6pt;
-    padding: 3pt;
-    padding-top: 6pt;
+    height: 14pt;
+    margin: 1pt;
 }
 
-legend {
-    width: 100%;
-    color: white;
-    margin: -3pt;
-    padding: 3pt;
-}
-
-.firstThingFieldset {
-    background-color: #602000;
-}
-
-.firstThingFieldset legend {
-    background-color: #A04000;
-}
-
-.secondThingFieldset {
-    background-color: #002080;
-}
-
-.secondThingFieldset legend {
-    background-color: #0040A0;
-}
-
-.viewFieldset {
-    background-color: #707020;
-}
-
-.viewFieldset legend {
-    background-color: #A0A040;
-}
-
-.cutsFieldset {
-    background-color: #008020;
-}
-
-.cutsFieldset legend {
-    background-color: #00A040;
-}
-
-.hintsFieldset {
-    background-color: #702070;
-}
-
-.hintsFieldset legend {
-    background-color: #A030A0;
+.controls input:hover, .controls select:hover {
+    background-color: #DDDDDD;
 }
 
 
-input, select {
-    background-color: #404000;
-    color: white;
-    border: 1px solid black;
+.controls label {
+    display: inline-block;
+    width: 20pt;
 }
 
-.position, .rotation, .scale, .cut {
-    width: 5em;
+.position, .rotation, .scale {
+    width: 98pt;
 }
 
-.plusminusbutton {
-    padding: 0;
-    background-color: #808000;
+.objtype {
+    width: 224pt;
 }
 
-a, a:visited, a:active, a:hover {
-    color: white
+.cut {
+    width: 64pt;
+}
+
+#addcut {
+    float: right;
+    display: block;
+    margin-top: -1pt;
+}
+
+.controls .plusminusbutton {
+    background-color: #CCC;
+    width: 24pt;
+}
+
+.controls .removebutton {
+    background-color: #FF0000;
+    width: 24pt;
+}
+
+.controls .removebutton:hover {
+    background-color: #f44;
+}
+
+input:focus, select:focus {
+    border-color: #FF00AA;
 }

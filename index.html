@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>intersections of things</title>
+        <title>Intersections</title>
         <meta charset="ascii">
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -10,82 +10,106 @@
     </head>
 <body>
 
-<form class="menu1">
-    <fieldset class='firstThingFieldset'>
-        <legend>First thing</legend>
-        <select id="objtype_1" class="objtype">
-            <option value="cube">Cube</option>
-            <option value="sphere">Sphere</option>
-            <option value="cone">Cone</option>
-            <option value="cylinder">Cylinder</option>
-        </select>
-        <br/>
-        Position<br/>
-        <label for="positionx_1">X</label><input id="positionx_1" class="position"><br/>
-        <label for="positiony_1">Y</label><input id="positiony_1" class="position"><br/>
-        <label for="positionz_1">Z</label><input id="positionz_1" class="position"><br/>
-        Scale<br/>
-        <label for="scalex_1">X</label><input id="scalex_1" class="scale"><br/>
-        <label for="scaley_1">Y</label><input id="scaley_1" class="scale"><br/>
-        <label for="scalez_1">Z</label><input id="scalez_1" class="scale"><br/>
-        Rotation<br/>
-        <label for="rotx_1">X</label><input id="rotx_1" class="rotation"><br/>
-        <label for="roty_1">Y</label><input id="roty_1" class="rotation"><br/>
-        <label for="rotz_1">Z</label><input id="rotz_1" class="rotation"><br/>
-    </fieldset>
-    <fieldset class='secondThingFieldset'>
-        <legend>Other thing</legend>
-        <select id="objtype_2" class="objtype">
-            <option value="cube">Cube</option>
-            <option value="sphere">Sphere</option>
-            <option value="cone">Cone</option>
-            <option value="cylinder">Cylinder</option>
-        </select>
-        <br/>
-        Position<br/>
-        <label for="positionx_2">X</label><input id="positionx_2" class="position"><br/>
-        <label for="positiony_2">Y</label><input id="positiony_2" class="position"><br/>
-        <label for="positionz_2">Z</label><input id="positionz_2" class="position"><br/>
-        Scale<br/>
-        <label for="scalex_2">X</label><input id="scalex_2" class="scale"><br/>
-        <label for="scaley_2">Y</label><input id="scaley_2" class="scale"><br/>
-        <label for="scalez_2">Z</label><input id="scalez_2" class="scale"><br/>
-        Rotation<br/>
-        <label for="rotx_2">X</label><input id="rotx_2" class="rotation"><br/>
-        <label for="roty_2">Y</label><input id="roty_2" class="rotation"><br/>
-        <label for="rotz_2">Z</label><input id="rotz_2" class="rotation"><br/>
-    </fieldset>
-    <fieldset class='viewFieldset'>
-        <legend>View</legend>
-        <input type='button' id="orthoview" value='Ortho'>
-        <input type='button' id="cabinetview" value='Cabinet'>
-    </fieldset>
-</form>
-<form class="menu2">
-    <fieldset class='hintsFieldset'>
-        <legend>Hints</legend>
+<div class="top">
+    <input type='button' id="orthoview" value='Ortho'>
+    <input type='button' id="cabinetview" value='Cabinet'>
+    <input type='button' id="showhints" value='Hints'>
+    <a id="permalink" href="href" target="_blank" title="Permalink"></a>
+</div>
+
+<div class="menu1">
+    <div class="firstThing"/>
+        <h3>First thing</h3>
+        <div class="controls">
+            <div>
+                <select id="objtype_1" class="objtype">
+                    <option value="cube">Cube</option>
+                    <option value="sphere">Sphere</option>
+                    <option value="cone">Cone</option>
+                    <option value="cylinder">Cylinder</option>
+                </select>
+            </div>
+            <div>Position</div>
+            <div><label for="positionx_1">X</label><input id="positionx_1" class="position"></div>
+            <div><label for="positiony_1">Y</label><input id="positiony_1" class="position"></div>
+            <div><label for="positionz_1">Z</label><input id="positionz_1" class="position"></div>
+            <div>Scale</div>
+            <div><label for="scalex_1">X</label><input id="scalex_1" class="scale"></div>
+            <div><label for="scaley_1">Y</label><input id="scaley_1" class="scale"></div>
+            <div><label for="scalez_1">Z</label><input id="scalez_1" class="scale"></div>
+            <div>Rotation</div>
+            <div><label for="rotx_1">X</label><input id="rotx_1" class="rotation"></div>
+            <div><label for="roty_1">Y</label><input id="roty_1" class="rotation"></div>
+            <div><label for="rotz_1">Z</label><input id="rotz_1" class="rotation"></div>
+        </div>
+    </div>
+    <div class='secondThing'>
+        <h3>Other thing</h3>
+        <div class="controls">
+            <div>
+                <select id="objtype_2" class="objtype">
+                    <option value="cube">Cube</option>
+                    <option value="sphere">Sphere</option>
+                    <option value="cone">Cone</option>
+                    <option value="cylinder">Cylinder</option>
+                </select>
+            </div>
+            <div>Position</div>
+            <div><label for="positionx_2">X</label><input id="positionx_2" class="position"></div>
+            <div><label for="positiony_2">Y</label><input id="positiony_2" class="position"></div>
+            <div><label for="positionz_2">Z</label><input id="positionz_2" class="position"></div>
+            <div>Scale</div>
+            <div><label for="scalex_2">X</label><input id="scalex_2" class="scale"></div>
+            <div><label for="scaley_2">Y</label><input id="scaley_2" class="scale"></div>
+            <div><label for="scalez_2">Z</label><input id="scalez_2" class="scale"></div>
+            <div>Rotation</div>
+            <div><label for="rotx_2">X</label><input id="rotx_2" class="rotation"></div>
+            <div><label for="roty_2">Y</label><input id="roty_2" class="rotation"></div>
+            <div><label for="rotz_2">Z</label><input id="rotz_2" class="rotation"></div>
+        </div>
+    </div>
+    <div id="cuts" class='cuts'>
+        <h3>Cuts<input type='button' id="addcut" value='Add'></h3>
+        <div class="controls"/>
+        </div>
+        
+    </div>
+</div>
+<div class="hints" id="hints">
+    <div class="hints_inner">
+        <h2>Hints</h2>
+        <p>This page calculates imperfect intersctions between three dimensional object using brute
+        force approach.</p>
+        <p>Handy keyboard shortcuts in input fields</p>
         <ul>
-            <li>this page imperfectly calculates itersections of things using brute force approach</li>
-            <li>use up/down/pgup/pgdown in input fields</li>
-            <li>use esc to remove cut in input field</li>
+            <li>use Up/Down/Page Up/Page Down to change value</li>
+            <li>use ESC to remove cut</li>
+        </ul>
+        <p>Obvious mouse controls</p>
+        <ul>
             <li>mouse wheel too zoom</li>
             <li>drag with left mouse button to rotate</li>
         </ul>
+        <p>Have fun! (or not)</p>
+        <p>(click anywhere to close)</p>
+    </div>
+</div>
+<!--
+<form class="menu2">
+    <fieldset class='hintsFieldset'>
     </fieldset>
-    <fieldset id="cutsFieldset" class='cutsFieldset'>
-        <legend>Cuts</legend>
-        <input type='button' id="addcut" value='Add'>
+    <fieldset class='viewFieldset'>
+        <legend>View</legend>
     </fieldset>
 
 </form>
-
+-->
 <div class="mainview" id="mainview">
     <canvas id="canvas"></canvas>
 </div>
-
+<!--
 <div class="permalink_container">
-    Permalink: <a id="permalink" href="href" target="_blank"></a>
 </div>
-
+-->
 </body>
 </html>

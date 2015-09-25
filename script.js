@@ -1,5 +1,14 @@
 "use strict";
 
+/**
+ * TODO:
+ *
+ *  refactor this mess!
+ *
+ *  split out separate module for intersections,
+ *  new class for 3d vertex (do not use 4d) just for start
+ */
+
 function roundTo(n, places) {
     n = Number(n)
     n = n.toFixed(places)
@@ -110,7 +119,7 @@ function setupButtons(control,
     });
 
     if(remove) {
-        $(control).after($("<input type='button' tabindex='-1' class='plusminusbutton' value='X'>").click(remove));
+        $(control).after($("<input type='button' tabindex='-1' class='removebutton' value='X'>").click(remove));
     }
     $(control).after($("<input type='button' tabindex='-1' class='plusminusbutton' value='"+lab4+"'>").click(op4));
     $(control).after($("<input type='button' tabindex='-1' class='plusminusbutton' value='"+lab3+"'>").click(op3));
@@ -719,7 +728,6 @@ function recalc() {
     theCuts.y = ycuts
     theCuts.z = zcuts
 
-
     redraw()
 }
 
@@ -862,13 +870,13 @@ function addCut(axis, val) {
     div.append(input)
 
     setupButtons(input,
-        "+0.1", function(v) { return roundTo(v+0.1, 1) },
-        "-0.1", function(v) { return roundTo(v-0.1, 1) },
+        "+.1", function(v) { return roundTo(v+0.1, 1) },
+        "-.1", function(v) { return roundTo(v-0.1, 1) },
         "+1", function(v) { return roundTo(v+1, 1) },
         "-1", function(v) { return roundTo(v+1, 1) },
         function() { div.remove(); scheduleRecalc(); })
 
-    $("#cutsFieldset").append(div);
+    $("#cuts .controls").append(div);
 }
 
 var scheduleHandle = undefined;
@@ -910,15 +918,15 @@ $(document).ready(function() {
     });
     $(".scale").each(function() {
         setupButtons(this,
-            "+0.1", function(v) { return roundTo(v+0.1,1) },
-            "-0.1", function(v) { return roundTo(v-0.1,1) },
+            "+.1", function(v) { return roundTo(v+0.1,1) },
+            "-.1", function(v) { return roundTo(v-0.1,1) },
             "*2", function(v) { return v*2 },
             "/2", function(v) { return v/2 });
     });
     $(".position").each(function() {
         setupButtons(this,
-            "+0.1", function(v) { return roundTo(v+0.1,1) },
-            "-0.1", function(v) { return roundTo(v-0.1,1) },
+            "+.1", function(v) { return roundTo(v+0.1,1) },
+            "-.1", function(v) { return roundTo(v-0.1,1) },
             "+1", function(v) { return roundTo(v+1,1) },
             "-1", function(v) { return roundTo(v-1,1) });
     });
@@ -961,6 +969,8 @@ $(document).ready(function() {
             })
         }
     });
+    $("#showhints").click(function() { $("#hints").show(100); } );
+    $("#hints").click(function() { $("#hints").hide(200); } );
     // <https://api.jquery.com/mousemove/>
     //  "remember that the mouseup event might be sent to a different HTML element
     //   than the mousemove event was. To account for this, the mouseup handler should
